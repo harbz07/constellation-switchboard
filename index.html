@@ -852,18 +852,44 @@ async function renderWaypoints() {
   try {
     const res = await fetch(ENDPOINTS.siddhartha + '/waypoints');
     const data = await res.json();
-    list.innerHTML = Object.entries(data).map(([k, v]) => `
-      <li class="waypoint-item">
-        <span class="waypoint-key">${k}</span>
-        <span class="waypoint-val">${
-          typeof v === 'string' && v.startsWith('http')
-            ? `<a href="${v}" target="_blank" rel="noopener">${v}</a>`
-            : v
-        }</span>
-      </li>
-    `).join('');
+    list.innerHTML = '';
+    Object.entries(data).forEach(([k, v]) => {
+      const li = document.createElement('li');
+      li.className = 'waypoint-item';
+
+      const keySpan = document.createElement('span');
+      keySpan.className = 'waypoint-key';
+      keySpan.textContent = k;
+
+      const valSpan = document.createElement('span');
+      valSpan.className = 'waypoint-val';
+
+      const strVal = String(v);
+      if (typeof v === 'string' && v.startsWith('http')) {
+        const a = document.createElement('a');
+        a.href = v;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.textContent = v;
+        valSpan.appendChild(a);
+      } else {
+        valSpan.textContent = strVal;
+      }
+
+      li.appendChild(keySpan);
+      li.appendChild(valSpan);
+      list.appendChild(li);
+    });
   } catch (e) {
-    list.innerHTML = `<li class="waypoint-item"><span class="waypoint-val" style="color: var(--red)">Failed to load waypoints: ${e.message}</span></li>`;
+    list.innerHTML = '';
+    const li = document.createElement('li');
+    li.className = 'waypoint-item';
+    const span = document.createElement('span');
+    span.className = 'waypoint-val';
+    span.style.color = 'var(--red)';
+    span.textContent = 'Failed to load waypoints: ' + e.message;
+    li.appendChild(span);
+    list.appendChild(li);
   }
 }
 
@@ -873,14 +899,19 @@ async function probeRoute(group, index) {
   const baseUrl = ENDPOINTS[group];
   const url = baseUrl + route.path;
   const item = document.getElementById(`route-${group}-${index}`);
-  const btn = item.querySelector('.btn-probe');
+  const btn = item ? item.querySelector('.btn-probe') : null;
   
   // Remove any existing result
-  const existing = item.querySelector('.probe-result');
+  const existing = item ? item.querySelector('.probe-result') : null;
   if (existing) { existing.remove(); return; } // toggle off
 
-  btn.classList.add('loading');
-  btn.textContent = '...';
+  if (btn) {
+    btn.classList.add('loading');
+    btn.textContent = '...';
+  }
+
+  const result = document.createElement('div');
+  result.className = 'probe-result';
 
   try {
     const start = performance.now();
@@ -893,19 +924,38 @@ async function probeRoute(group, index) {
     } else {
       body = await res.text();
     }
-    const result = document.createElement('div');
-    result.className = 'probe-result';
-    result.innerHTML = `<div class="status-code ${res.ok ? 'ok' : 'err'}">${res.status} ${res.statusText} · ${elapsed}ms</div>${escapeHtml(body)}`;
-    item.appendChild(result);
+
+    const statusEl = document.createElement('div');
+    statusEl.className = `status-code ${res.ok ? 'ok' : 'err'}`;
+    statusEl.textContent = `${res.status} ${res.statusText} · ${elapsed}ms`;
+
+    const pre = document.createElement('pre');
+    pre.style.margin = '0';
+    pre.style.whiteSpace = 'pre-wrap';
+    pre.textContent = body;
+
+    result.appendChild(statusEl);
+    result.appendChild(pre);
   } catch (e) {
-    const result = document.createElement('div');
-    result.className = 'probe-result';
-    result.innerHTML = `<div class="status-code err">ERROR</div>${escapeHtml(e.message)}`;
-    item.appendChild(result);
+    const statusEl = document.createElement('div');
+    statusEl.className = 'status-code err';
+    statusEl.textContent = 'ERROR';
+
+    const pre = document.createElement('pre');
+    pre.style.margin = '0';
+    pre.style.whiteSpace = 'pre-wrap';
+    pre.textContent = e.message;
+
+    result.appendChild(statusEl);
+    result.appendChild(pre);
   }
 
-  btn.classList.remove('loading');
-  btn.textContent = 'Probe';
+  if (item) { item.appendChild(result); }
+
+  if (btn) {
+    btn.classList.remove('loading');
+    btn.textContent = 'Probe';
+  }
 }
 
 // ===== PROBE ALL (STATUS) =====
@@ -1035,11 +1085,18 @@ async function quickDispatch() {
 
   const url = ENDPOINTS[target] + pathMap[endpoint];
   resultEl.className = 'dispatch-result visible';
+
+  let body;
+  try {
+    body = JSON.parse(bodyStr);
+  } catch {
+    resultEl.textContent = 'Body must be valid JSON.';
+    return;
+  }
+
   resultEl.textContent = `POST ${url}\nBody: ${bodyStr}\n\nSending...`;
 
   try {
-    let body;
-    try { body = JSON.parse(bodyStr); } catch { body = bodyStr; }
     const start = performance.now();
     const res = await fetch(url, {
       method: 'POST',
@@ -1069,7 +1126,13 @@ function toggleGroup(header) {
 
 // ===== UTILS =====
 function escapeHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if (typeof str !== 'string') { str = String(str); }
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ===== INIT =====
