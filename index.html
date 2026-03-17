@@ -899,10 +899,12 @@ async function probeRoute(group, index) {
   const baseUrl = ENDPOINTS[group];
   const url = baseUrl + route.path;
   const item = document.getElementById(`route-${group}-${index}`);
-  const btn = item ? item.querySelector('.btn-probe') : null;
-  
+  if (!item) { return; }
+
+  const btn = item.querySelector('.btn-probe');
+
   // Remove any existing result
-  const existing = item ? item.querySelector('.probe-result') : null;
+  const existing = item.querySelector('.probe-result');
   if (existing) { existing.remove(); return; } // toggle off
 
   if (btn) {
@@ -950,7 +952,7 @@ async function probeRoute(group, index) {
     result.appendChild(pre);
   }
 
-  if (item) { item.appendChild(result); }
+  item.appendChild(result);
 
   if (btn) {
     btn.classList.remove('loading');
