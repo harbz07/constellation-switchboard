@@ -146,7 +146,7 @@ a:hover { text-decoration: underline; }
 }
 .node-card[data-node="frontend"]::before { background: var(--cyan); }
 .node-card[data-node="api"]::before { background: var(--amber); }
-.node-card[data-node="siddhartha"]::before { background: var(--purple); }
+.node-card[data-node="siddartha"]::before { background: var(--purple); }
 
 .node-header {
   display: flex;
@@ -170,7 +170,7 @@ a:hover { text-decoration: underline; }
 }
 .badge-frontend { background: var(--cyan-glow); color: var(--cyan); }
 .badge-api { background: var(--amber-dim); color: var(--amber); }
-.badge-siddhartha { background: var(--purple-dim); color: var(--purple); }
+.badge-siddartha { background: var(--purple-dim); color: var(--purple); }
 
 .node-status {
   display: flex;
@@ -645,16 +645,16 @@ footer a { color: var(--text-muted); }
         </div>
       </div>
       <div class="node-url">api.soul-os.cc</div>
-      <div class="node-desc">v2.0 gateway. Proxies all traffic to Siddhartha via service binding (zero-latency worker-to-worker). CORS-enabled. OpenAI-compatible + ACP facade.</div>
+      <div class="node-desc">v2.0 gateway. Proxies all traffic to Siddartha via service binding (zero-latency worker-to-worker). CORS-enabled. OpenAI-compatible + ACP facade.</div>
     </div>
 
-    <div class="node-card" data-node="siddhartha">
+    <div class="node-card" data-node="siddartha">
       <div class="node-header">
         <div class="node-name">
-          <span class="node-badge badge-siddhartha">BE</span>
-          Siddhartha
+          <span class="node-badge badge-siddartha">BE</span>
+          Siddartha
         </div>
-        <div class="node-status" id="status-siddhartha">
+        <div class="node-status" id="status-siddartha">
           <span class="status-dot checking"></span>
           <span>checking...</span>
         </div>
@@ -691,14 +691,14 @@ footer a { color: var(--text-muted); }
       <ul class="route-list" id="routes-api"></ul>
     </div>
 
-    <!-- Siddhartha Routes -->
+    <!-- Siddartha Routes -->
     <div class="route-group">
       <div class="route-group-header" onclick="toggleGroup(this)">
         <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        <span class="group-label" style="color: var(--purple)">Siddhartha</span>
+        <span class="group-label" style="color: var(--purple)">Siddartha</span>
         <span class="group-count">10 routes</span>
       </div>
-      <ul class="route-list" id="routes-siddhartha"></ul>
+      <ul class="route-list" id="routes-siddartha"></ul>
     </div>
   </section>
 
@@ -738,7 +738,7 @@ footer a { color: var(--text-muted); }
           <option value="chat">POST /v1/chat/completions</option>
         </select>
         <select id="dispatch-target">
-          <option value="siddhartha">Siddhartha (backend)</option>
+          <option value="siddartha">Siddartha (backend)</option>
           <option value="api">api.soul-os.cc (gateway)</option>
           <option value="frontend">soul-os.cc (frontend)</option>
         </select>
@@ -762,7 +762,7 @@ footer a { color: var(--text-muted); }
 const ENDPOINTS = {
   frontend: 'https://soul-os.cc',
   api: 'https://api.soul-os.cc',
-  siddhartha: 'https://siddartha.harveytagalicud7.workers.dev'
+  siddartha: 'https://siddartha.harveytagalicud7.workers.dev'
 };
 
 // ===== ROUTE DEFINITIONS =====
@@ -779,17 +779,17 @@ const ROUTES = {
   ],
   api: [
     { method: 'GET',  path: '/',                 desc: 'Gateway manifest — routes, version, upstream status' },
-    { method: 'GET',  path: '/health',           desc: 'Gateway + upstream Siddhartha health (deep check)' },
-    { method: 'GET',  path: '/waypoints',        desc: 'Proxied → Siddhartha waypoint registry' },
-    { method: 'POST', path: '/v1/chat/completions', desc: 'Proxied → Siddhartha Mem0-hydrated agent chat' },
-    { method: 'POST', path: '/api/route',        desc: 'Proxied → Siddhartha memory-hydrated agent call' },
-    { method: 'POST', path: '/dispatch',         desc: 'Proxied → Siddhartha passage dispatch' },
-    { method: 'POST', path: '/message',          desc: 'Proxied → Siddhartha inter-agent message' },
-    { method: 'POST', path: '/chain',            desc: 'Proxied → Siddhartha multi-hop chain' },
-    { method: 'POST', path: '/parietal',         desc: 'Proxied → Siddhartha semantic gravity' },
-    { method: 'POST', path: '/log',              desc: 'Proxied → Siddhartha atlas session log' },
+    { method: 'GET',  path: '/health',           desc: 'Gateway + upstream Siddartha health (deep check)' },
+    { method: 'GET',  path: '/waypoints',        desc: 'Proxied → Siddartha waypoint registry' },
+    { method: 'POST', path: '/v1/chat/completions', desc: 'Proxied → Siddartha Mem0-hydrated agent chat' },
+    { method: 'POST', path: '/api/route',        desc: 'Proxied → Siddartha memory-hydrated agent call' },
+    { method: 'POST', path: '/dispatch',         desc: 'Proxied → Siddartha passage dispatch' },
+    { method: 'POST', path: '/message',          desc: 'Proxied → Siddartha inter-agent message' },
+    { method: 'POST', path: '/chain',            desc: 'Proxied → Siddartha multi-hop chain' },
+    { method: 'POST', path: '/parietal',         desc: 'Proxied → Siddartha semantic gravity' },
+    { method: 'POST', path: '/log',              desc: 'Proxied → Siddartha atlas session log' },
   ],
-  siddhartha: [
+  Siddartha: [
     { method: 'GET',  path: '/',                 desc: 'Vessel manifest — agents, routes, atlas link' },
     { method: 'GET',  path: '/health',           desc: 'Pulse check (omnibus-v2)' },
     { method: 'GET',  path: '/waypoints',        desc: 'Full waypoint registry' },
@@ -850,7 +850,7 @@ function renderAgents() {
 async function renderWaypoints() {
   const list = document.getElementById('waypoint-list');
   try {
-    const res = await fetch(ENDPOINTS.siddhartha + '/waypoints');
+    const res = await fetch(ENDPOINTS.siddartha + '/waypoints');
     const data = await res.json();
     list.innerHTML = '';
     Object.entries(data).forEach(([k, v]) => {
@@ -969,7 +969,7 @@ async function probeAll() {
   const checks = [
     { id: 'status-frontend', url: ENDPOINTS.frontend + '/api/health' },
     { id: 'status-api', url: ENDPOINTS.api + '/health' },
-    { id: 'status-siddhartha', url: ENDPOINTS.siddhartha + '/health' },
+    { id: 'status-siddartha', url: ENDPOINTS.siddartha + '/health' },
   ];
 
   for (const check of checks) {
