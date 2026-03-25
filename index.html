@@ -2,13 +2,13 @@
 <html lang="en" data-theme="dark">
 <head>
 <!--
- ██████╗ ██████╗ ██╗   ██╗██████╗ ██╗███████╗██████╗
-██╔════╝██╔═══██╗██║   ██║██╔══██╗██║██╔════╝██╔══██╗
-██║     ██║   ██║██║   ██║██████╔╝██║█████╗  ██████╔╝
-██║     ██║   ██║██║   ██║██╔══██╗██║██╔══╝  ██╔══██╗
-╚██████╗╚██████╔╝╚██████╔╝██║  ██║██║███████╗██║  ██║
- ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝
-        Created by Comet/Perplexity of The Constellation
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
         https://www.perplexity.ai/computer
 -->
 <meta name="generator" content="Perplexity Computer">
@@ -146,7 +146,7 @@ a:hover { text-decoration: underline; }
 }
 .node-card[data-node="frontend"]::before { background: var(--cyan); }
 .node-card[data-node="api"]::before { background: var(--amber); }
-.node-card[data-node="siddartha"]::before { background: var(--purple); }
+.node-card[data-node="siddhartha"]::before { background: var(--purple); }
 
 .node-header {
   display: flex;
@@ -170,7 +170,7 @@ a:hover { text-decoration: underline; }
 }
 .badge-frontend { background: var(--cyan-glow); color: var(--cyan); }
 .badge-api { background: var(--amber-dim); color: var(--amber); }
-.badge-siddartha { background: var(--purple-dim); color: var(--purple); }
+.badge-siddhartha { background: var(--purple-dim); color: var(--purple); }
 
 .node-status {
   display: flex;
@@ -415,6 +415,201 @@ a:hover { text-decoration: underline; }
   word-break: break-all;
 }
 
+/* ===== MAILBOX VIEWER ===== */
+.mailbox-agents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.mailbox-agent-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: all var(--transition);
+  position: relative;
+}
+.mailbox-agent-btn:hover {
+  background: var(--surface-2);
+}
+.mailbox-agent-btn.active {
+  background: var(--surface-2);
+  border-color: var(--text-muted);
+}
+.mailbox-badge {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: var(--red);
+  color: #fff;
+  padding: 0 4px;
+}
+.mailbox-badge.hidden { display: none; }
+
+.mailbox-toolbar {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.mailbox-toolbar-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.mailbox-toolbar-btn:hover {
+  border-color: var(--cyan-dim);
+  color: var(--cyan);
+  background: var(--cyan-glow);
+}
+.mailbox-toolbar-btn svg {
+  width: 12px; height: 12px; flex-shrink: 0;
+}
+
+.mailbox-messages {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.mailbox-empty {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--text-faint);
+  font-size: var(--text-sm);
+}
+.mailbox-msg {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--transition);
+}
+.mailbox-msg:last-child { border-bottom: none; }
+.mailbox-msg:hover { background: var(--surface-2); }
+.mailbox-msg.unread {
+  border-left: 3px solid var(--cyan);
+}
+.mailbox-msg-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+}
+.mailbox-msg-agents {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.mailbox-msg-intent {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-3);
+  color: var(--text-muted);
+}
+.mailbox-msg-thread {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--purple-dim);
+  color: var(--purple);
+}
+.mailbox-msg-time {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  margin-left: auto;
+}
+.mailbox-msg-unread-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  flex-shrink: 0;
+}
+.mailbox-msg-unread-dot.read { background: transparent; }
+.mailbox-msg-body {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+  cursor: pointer;
+}
+.mailbox-msg-body.truncated::after {
+  content: ' ...';
+  color: var(--text-faint);
+}
+.mailbox-msg-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+.mailbox-msg-actions .btn-probe {
+  font-size: var(--text-xs);
+  padding: 3px 8px;
+}
+.mailbox-reply-form {
+  display: none;
+  margin-top: var(--space-2);
+  padding: var(--space-2);
+  background: var(--bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.mailbox-reply-form.visible { display: block; }
+.mailbox-reply-form textarea {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  resize: vertical;
+  min-height: 60px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.mailbox-reply-form textarea:focus {
+  border-color: var(--cyan-dim);
+}
+.mailbox-reply-form button {
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--cyan-dim);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+.mailbox-reply-form button:hover { background: var(--cyan); }
+.mailbox-loading {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+}
+
 /* ===== QUICK DISPATCH ===== */
 .dispatch-panel {
   background: var(--surface);
@@ -571,6 +766,8 @@ footer a { color: var(--text-muted); }
   .dispatch-bar input { min-width: 100%; }
   .waypoint-item { flex-direction: column; gap: var(--space-1); }
   .waypoint-key { min-width: unset; }
+  .mailbox-agents { gap: var(--space-1); }
+  .mailbox-agent-btn { font-size: var(--text-xs); padding: var(--space-1) var(--space-2); }
 }
 
 /* Scrollbar */
@@ -645,16 +842,16 @@ footer a { color: var(--text-muted); }
         </div>
       </div>
       <div class="node-url">api.soul-os.cc</div>
-      <div class="node-desc">v2.0 gateway. Proxies all traffic to Siddartha via service binding (zero-latency worker-to-worker). CORS-enabled. OpenAI-compatible + ACP facade.</div>
+      <div class="node-desc">v2.0 gateway. Proxies all traffic to Siddhartha via service binding (zero-latency worker-to-worker). CORS-enabled. OpenAI-compatible + ACP facade.</div>
     </div>
 
-    <div class="node-card" data-node="siddartha">
+    <div class="node-card" data-node="siddhartha">
       <div class="node-header">
         <div class="node-name">
-          <span class="node-badge badge-siddartha">BE</span>
-          Siddartha
+          <span class="node-badge badge-siddhartha">BE</span>
+          Siddhartha
         </div>
-        <div class="node-status" id="status-siddartha">
+        <div class="node-status" id="status-siddhartha">
           <span class="status-dot checking"></span>
           <span>checking...</span>
         </div>
@@ -686,19 +883,19 @@ footer a { color: var(--text-muted); }
       <div class="route-group-header" onclick="toggleGroup(this)">
         <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         <span class="group-label" style="color: var(--amber)">api.soul-os.cc</span>
-        <span class="group-count">10 routes</span>
+        <span class="group-count">14 routes</span>
       </div>
       <ul class="route-list" id="routes-api"></ul>
     </div>
 
-    <!-- Siddartha Routes -->
+    <!-- Siddhartha Routes -->
     <div class="route-group">
       <div class="route-group-header" onclick="toggleGroup(this)">
         <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        <span class="group-label" style="color: var(--purple)">Siddartha</span>
-        <span class="group-count">10 routes</span>
+        <span class="group-label" style="color: var(--purple)">Siddhartha</span>
+        <span class="group-count">13 routes</span>
       </div>
-      <ul class="route-list" id="routes-siddartha"></ul>
+      <ul class="route-list" id="routes-siddhartha"></ul>
     </div>
   </section>
 
@@ -720,6 +917,28 @@ footer a { color: var(--text-muted); }
     <ul class="waypoint-list" id="waypoint-list"></ul>
   </section>
 
+  <!-- MAILBOX VIEWER -->
+  <section class="section">
+    <h2 class="section-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Mailbox
+    </h2>
+    <div class="mailbox-agents" id="mailbox-agents"></div>
+    <div class="mailbox-toolbar" id="mailbox-toolbar" style="display:none;">
+      <button class="mailbox-toolbar-btn" onclick="refreshMailbox()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        Refresh
+      </button>
+      <button class="mailbox-toolbar-btn" onclick="clearReadMessages()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Clear Read
+      </button>
+    </div>
+    <div class="mailbox-messages" id="mailbox-messages">
+      <div class="mailbox-empty">Select an agent to view their mailbox</div>
+    </div>
+  </section>
+
   <!-- QUICK DISPATCH -->
   <section class="section">
     <h2 class="section-title">
@@ -736,9 +955,13 @@ footer a { color: var(--text-muted); }
           <option value="parietal">POST /parietal</option>
           <option value="log">POST /log</option>
           <option value="chat">POST /v1/chat/completions</option>
+          <option value="reply">POST /reply</option>
+          <option value="mailbox">GET /mailbox/:agent</option>
+          <option value="ack">POST /mailbox/:agent/ack</option>
+          <option value="clear">POST /mailbox/:agent/clear</option>
         </select>
         <select id="dispatch-target">
-          <option value="siddartha">Siddartha (backend)</option>
+          <option value="siddhartha">Siddhartha (backend)</option>
           <option value="api">api.soul-os.cc (gateway)</option>
           <option value="frontend">soul-os.cc (frontend)</option>
         </select>
@@ -762,7 +985,16 @@ footer a { color: var(--text-muted); }
 const ENDPOINTS = {
   frontend: 'https://soul-os.cc',
   api: 'https://api.soul-os.cc',
-  siddartha: 'https://siddartha.harveytagalicud7.workers.dev'
+  siddhartha: 'https://siddartha.harveytagalicud7.workers.dev'
+};
+
+// ===== AGENT COLOR MAP =====
+const AGENT_COLORS = {
+  claude: 'var(--purple)',
+  orion: 'var(--blue)',
+  triptych: 'var(--amber)',
+  mephistopheles: 'var(--red)',
+  comet: 'var(--cyan)',
 };
 
 // ===== ROUTE DEFINITIONS =====
@@ -779,21 +1011,28 @@ const ROUTES = {
   ],
   api: [
     { method: 'GET',  path: '/',                 desc: 'Gateway manifest — routes, version, upstream status' },
-    { method: 'GET',  path: '/health',           desc: 'Gateway + upstream Siddartha health (deep check)' },
-    { method: 'GET',  path: '/waypoints',        desc: 'Proxied → Siddartha waypoint registry' },
-    { method: 'POST', path: '/v1/chat/completions', desc: 'Proxied → Siddartha Mem0-hydrated agent chat' },
-    { method: 'POST', path: '/api/route',        desc: 'Proxied → Siddartha memory-hydrated agent call' },
-    { method: 'POST', path: '/dispatch',         desc: 'Proxied → Siddartha passage dispatch' },
-    { method: 'POST', path: '/message',          desc: 'Proxied → Siddartha inter-agent message' },
-    { method: 'POST', path: '/chain',            desc: 'Proxied → Siddartha multi-hop chain' },
-    { method: 'POST', path: '/parietal',         desc: 'Proxied → Siddartha semantic gravity' },
-    { method: 'POST', path: '/log',              desc: 'Proxied → Siddartha atlas session log' },
+    { method: 'GET',  path: '/health',           desc: 'Gateway + upstream Siddhartha health (deep check)' },
+    { method: 'GET',  path: '/waypoints',        desc: 'Proxied → Siddhartha waypoint registry' },
+    { method: 'POST', path: '/v1/chat/completions', desc: 'Proxied → Siddhartha Mem0-hydrated agent chat' },
+    { method: 'POST', path: '/api/route',        desc: 'Proxied → Siddhartha memory-hydrated agent call' },
+    { method: 'POST', path: '/dispatch',         desc: 'Proxied → Siddhartha passage dispatch' },
+    { method: 'POST', path: '/message',          desc: 'Proxied → Siddhartha inter-agent message' },
+    { method: 'POST', path: '/chain',            desc: 'Proxied → Siddhartha multi-hop chain' },
+    { method: 'POST', path: '/parietal',         desc: 'Proxied → Siddhartha semantic gravity' },
+    { method: 'POST', path: '/log',              desc: 'Proxied → Siddhartha atlas session log' },
+    { method: 'GET',  path: '/mailbox/:agent',   desc: 'Proxied → Siddhartha mailbox pull' },
+    { method: 'POST', path: '/mailbox/:agent/ack', desc: 'Proxied → Siddhartha mailbox ack' },
+    { method: 'POST', path: '/mailbox/:agent/clear', desc: 'Proxied → Siddhartha mailbox clear' },
+    { method: 'POST', path: '/reply',            desc: 'Proxied → Siddhartha agent reply' },
   ],
-  Siddartha: [
+  siddhartha: [
     { method: 'GET',  path: '/',                 desc: 'Vessel manifest — agents, routes, atlas link' },
     { method: 'GET',  path: '/health',           desc: 'Pulse check (omnibus-v2)' },
     { method: 'GET',  path: '/waypoints',        desc: 'Full waypoint registry' },
     { method: 'GET',  path: '/mailbox/:agent',   desc: 'Pull messages addressed to an agent' },
+    { method: 'POST', path: '/mailbox/:agent/ack', desc: 'Acknowledge a message by msg_id' },
+    { method: 'POST', path: '/mailbox/:agent/clear', desc: 'Clear read or all messages' },
+    { method: 'POST', path: '/reply',            desc: 'Agent reply to a mailbox message' },
     { method: 'POST', path: '/api/route',        desc: 'Memory-hydrated agent call (@agent:intent {request})' },
     { method: 'POST', path: '/dispatch',         desc: 'Passage dispatch → Notion / Discord' },
     { method: 'POST', path: '/message',          desc: 'Inter-agent message (from, to, intent, body)' },
@@ -850,46 +1089,20 @@ function renderAgents() {
 async function renderWaypoints() {
   const list = document.getElementById('waypoint-list');
   try {
-    const res = await fetch(ENDPOINTS.siddartha + '/waypoints');
+    const res = await fetch(ENDPOINTS.siddhartha + '/waypoints');
     const data = await res.json();
-    list.innerHTML = '';
-    Object.entries(data).forEach(([k, v]) => {
-      const li = document.createElement('li');
-      li.className = 'waypoint-item';
-
-      const keySpan = document.createElement('span');
-      keySpan.className = 'waypoint-key';
-      keySpan.textContent = k;
-
-      const valSpan = document.createElement('span');
-      valSpan.className = 'waypoint-val';
-
-      const strVal = String(v);
-      if (typeof v === 'string' && v.startsWith('http')) {
-        const a = document.createElement('a');
-        a.href = v;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.textContent = v;
-        valSpan.appendChild(a);
-      } else {
-        valSpan.textContent = strVal;
-      }
-
-      li.appendChild(keySpan);
-      li.appendChild(valSpan);
-      list.appendChild(li);
-    });
+    list.innerHTML = Object.entries(data).map(([k, v]) => `
+      <li class="waypoint-item">
+        <span class="waypoint-key">${k}</span>
+        <span class="waypoint-val">${
+          typeof v === 'string' && v.startsWith('http')
+            ? `<a href="${v}" target="_blank" rel="noopener">${v}</a>`
+            : v
+        }</span>
+      </li>
+    `).join('');
   } catch (e) {
-    list.innerHTML = '';
-    const li = document.createElement('li');
-    li.className = 'waypoint-item';
-    const span = document.createElement('span');
-    span.className = 'waypoint-val';
-    span.style.color = 'var(--red)';
-    span.textContent = 'Failed to load waypoints: ' + e.message;
-    li.appendChild(span);
-    list.appendChild(li);
+    list.innerHTML = `<li class="waypoint-item"><span class="waypoint-val" style="color: var(--red)">Failed to load waypoints: ${e.message}</span></li>`;
   }
 }
 
@@ -899,21 +1112,14 @@ async function probeRoute(group, index) {
   const baseUrl = ENDPOINTS[group];
   const url = baseUrl + route.path;
   const item = document.getElementById(`route-${group}-${index}`);
-  if (!item) { return; }
-
   const btn = item.querySelector('.btn-probe');
 
   // Remove any existing result
   const existing = item.querySelector('.probe-result');
   if (existing) { existing.remove(); return; } // toggle off
 
-  if (btn) {
-    btn.classList.add('loading');
-    btn.textContent = '...';
-  }
-
-  const result = document.createElement('div');
-  result.className = 'probe-result';
+  btn.classList.add('loading');
+  btn.textContent = '...';
 
   try {
     const start = performance.now();
@@ -926,38 +1132,19 @@ async function probeRoute(group, index) {
     } else {
       body = await res.text();
     }
-
-    const statusEl = document.createElement('div');
-    statusEl.className = `status-code ${res.ok ? 'ok' : 'err'}`;
-    statusEl.textContent = `${res.status} ${res.statusText} · ${elapsed}ms`;
-
-    const pre = document.createElement('pre');
-    pre.style.margin = '0';
-    pre.style.whiteSpace = 'pre-wrap';
-    pre.textContent = body;
-
-    result.appendChild(statusEl);
-    result.appendChild(pre);
+    const result = document.createElement('div');
+    result.className = 'probe-result';
+    result.innerHTML = `<div class="status-code ${res.ok ? 'ok' : 'err'}">${res.status} ${res.statusText} · ${elapsed}ms</div>${escapeHtml(body)}`;
+    item.appendChild(result);
   } catch (e) {
-    const statusEl = document.createElement('div');
-    statusEl.className = 'status-code err';
-    statusEl.textContent = 'ERROR';
-
-    const pre = document.createElement('pre');
-    pre.style.margin = '0';
-    pre.style.whiteSpace = 'pre-wrap';
-    pre.textContent = e.message;
-
-    result.appendChild(statusEl);
-    result.appendChild(pre);
+    const result = document.createElement('div');
+    result.className = 'probe-result';
+    result.innerHTML = `<div class="status-code err">ERROR</div>${escapeHtml(e.message)}`;
+    item.appendChild(result);
   }
 
-  item.appendChild(result);
-
-  if (btn) {
-    btn.classList.remove('loading');
-    btn.textContent = 'Probe';
-  }
+  btn.classList.remove('loading');
+  btn.textContent = 'Probe';
 }
 
 // ===== PROBE ALL (STATUS) =====
@@ -969,7 +1156,7 @@ async function probeAll() {
   const checks = [
     { id: 'status-frontend', url: ENDPOINTS.frontend + '/api/health' },
     { id: 'status-api', url: ENDPOINTS.api + '/health' },
-    { id: 'status-siddartha', url: ENDPOINTS.siddartha + '/health' },
+    { id: 'status-siddhartha', url: ENDPOINTS.siddhartha + '/health' },
   ];
 
   for (const check of checks) {
@@ -997,6 +1184,197 @@ async function probeAll() {
   btn.style.opacity = '1';
 }
 
+// ===== MAILBOX VIEWER =====
+let currentMailboxAgent = null;
+let mailboxCache = {};
+
+function renderMailboxAgents() {
+  const container = document.getElementById('mailbox-agents');
+  const agents = ['claude', 'orion', 'triptych', 'mephistopheles', 'comet'];
+  container.innerHTML = agents.map(agent => `
+    <button class="mailbox-agent-btn" id="mailbox-btn-${agent}" onclick="selectMailboxAgent('${agent}')" style="color: ${AGENT_COLORS[agent]}; border-color: ${AGENT_COLORS[agent]}33;">
+      ${agent.charAt(0).toUpperCase() + agent.slice(1)}
+      <span class="mailbox-badge hidden" id="mailbox-badge-${agent}">0</span>
+    </button>
+  `).join('');
+}
+
+async function selectMailboxAgent(agent) {
+  // Update active button
+  document.querySelectorAll('.mailbox-agent-btn').forEach(btn => btn.classList.remove('active'));
+  const btn = document.getElementById(`mailbox-btn-${agent}`);
+  btn.classList.add('active');
+
+  currentMailboxAgent = agent;
+  document.getElementById('mailbox-toolbar').style.display = 'flex';
+  await fetchMailbox(agent);
+}
+
+async function fetchMailbox(agent) {
+  const container = document.getElementById('mailbox-messages');
+  container.innerHTML = '<div class="mailbox-loading">Fetching mailbox...</div>';
+
+  try {
+    const res = await fetch(ENDPOINTS.siddhartha + '/mailbox/' + agent);
+    const data = await res.json();
+    const messages = Array.isArray(data) ? data : (data.messages || []);
+    mailboxCache[agent] = messages;
+
+    // Update badge
+    const unread = messages.filter(m => !m.read).length;
+    const badge = document.getElementById(`mailbox-badge-${agent}`);
+    if (unread > 0) {
+      badge.textContent = unread;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+
+    renderMailboxMessages(agent, messages);
+  } catch (e) {
+    container.innerHTML = `<div class="mailbox-empty" style="color: var(--red)">Failed to load mailbox: ${escapeHtml(e.message)}</div>`;
+  }
+}
+
+function timeAgo(ts) {
+  if (!ts) return '';
+  const now = Date.now();
+  const then = new Date(ts).getTime();
+  const diff = Math.max(0, now - then);
+  const secs = Math.floor(diff / 1000);
+  if (secs < 60) return secs + 's ago';
+  const mins = Math.floor(secs / 60);
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  return days + 'd ago';
+}
+
+function renderMailboxMessages(agent, messages) {
+  const container = document.getElementById('mailbox-messages');
+
+  if (!messages.length) {
+    container.innerHTML = '<div class="mailbox-empty">No messages</div>';
+    return;
+  }
+
+  container.innerHTML = messages.map((msg, i) => {
+    const fromColor = AGENT_COLORS[msg.from] || 'var(--text)';
+    const toColor = AGENT_COLORS[msg.to] || 'var(--text)';
+    const body = msg.body || msg.content || '';
+    const truncated = body.length > 200;
+    const displayBody = truncated ? body.slice(0, 200) : body;
+    const isUnread = !msg.read;
+    const msgId = msg.msg_id || msg.id || '';
+
+    return `
+      <div class="mailbox-msg ${isUnread ? 'unread' : ''}">
+        <div class="mailbox-msg-header">
+          <span class="mailbox-msg-unread-dot ${isUnread ? '' : 'read'}"></span>
+          <span class="mailbox-msg-agents">
+            <span style="color: ${fromColor}">${escapeHtml(msg.from || '?')}</span>
+            <span style="color: var(--text-faint)"> → </span>
+            <span style="color: ${toColor}">${escapeHtml(msg.to || '?')}</span>
+          </span>
+          ${msg.intent ? `<span class="mailbox-msg-intent">${escapeHtml(msg.intent)}</span>` : ''}
+          ${msg.thread ? `<span class="mailbox-msg-thread">${escapeHtml(msg.thread)}</span>` : ''}
+          <span class="mailbox-msg-time">${timeAgo(msg.timestamp || msg.ts)}</span>
+        </div>
+        <div class="mailbox-msg-body ${truncated ? 'truncated' : ''}" onclick="toggleMsgBody(this, ${i})" data-full="${escapeAttr(body)}" data-short="${escapeAttr(displayBody)}" data-expanded="false">${escapeHtml(displayBody)}</div>
+        <div class="mailbox-msg-actions">
+          ${isUnread ? `<button class="btn-probe" onclick="ackMessage('${agent}', '${escapeAttr(msgId)}')">Ack</button>` : ''}
+          <button class="btn-probe" onclick="toggleReplyForm('reply-form-${i}')">Reply</button>
+        </div>
+        <div class="mailbox-reply-form" id="reply-form-${i}">
+          <textarea placeholder="Type your reply..."></textarea>
+          <button onclick="sendReply('${agent}', '${escapeAttr(msgId)}', this)">Send Reply</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleMsgBody(el, index) {
+  const expanded = el.dataset.expanded === 'true';
+  if (expanded) {
+    el.textContent = el.dataset.short;
+    el.dataset.expanded = 'false';
+    if (el.dataset.full.length > 200) el.classList.add('truncated');
+  } else {
+    el.textContent = el.dataset.full;
+    el.dataset.expanded = 'true';
+    el.classList.remove('truncated');
+  }
+}
+
+function toggleReplyForm(id) {
+  const form = document.getElementById(id);
+  form.classList.toggle('visible');
+  if (form.classList.contains('visible')) {
+    form.querySelector('textarea').focus();
+  }
+}
+
+async function ackMessage(agent, msgId) {
+  try {
+    await fetch(ENDPOINTS.siddhartha + '/mailbox/' + agent + '/ack', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ msg_id: msgId }),
+    });
+    await fetchMailbox(agent);
+  } catch (e) {
+    alert('Ack failed: ' + e.message);
+  }
+}
+
+async function sendReply(agent, msgId, btn) {
+  const form = btn.parentElement;
+  const textarea = form.querySelector('textarea');
+  const response = textarea.value.trim();
+  if (!response) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    await fetch(ENDPOINTS.siddhartha + '/reply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agent: agent, msg_id: msgId, response: response }),
+    });
+    textarea.value = '';
+    form.classList.remove('visible');
+    await fetchMailbox(agent);
+  } catch (e) {
+    alert('Reply failed: ' + e.message);
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Send Reply';
+}
+
+async function refreshMailbox() {
+  if (currentMailboxAgent) {
+    await fetchMailbox(currentMailboxAgent);
+  }
+}
+
+async function clearReadMessages() {
+  if (!currentMailboxAgent) return;
+  try {
+    await fetch(ENDPOINTS.siddhartha + '/mailbox/' + currentMailboxAgent + '/clear', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode: 'read' }),
+    });
+    await fetchMailbox(currentMailboxAgent);
+  } catch (e) {
+    alert('Clear failed: ' + e.message);
+  }
+}
+
 // ===== DISPATCH EXAMPLES =====
 const EXAMPLES = {
   route: [
@@ -1010,9 +1388,9 @@ const EXAMPLES = {
     { label: 'Dispatch to Discord', body: {source: 'switchboard', destination: 'discord', payload: 'Signal from the Constellation.'}, color: 'var(--blue)' },
   ],
   message: [
-    { label: 'Claude \u2192 Orion', body: {from: 'claude', to: 'orion', intent: 'handoff', body: 'Passing context from the architect to the foundry.'}, color: 'var(--purple)' },
-    { label: 'Orion \u2192 Triptych', body: {from: 'orion', to: 'triptych', intent: 'review', body: 'Cross-reference this against the triptych lens.'}, color: 'var(--blue)' },
-    { label: 'Comet \u2192 Claude', body: {from: 'comet', to: 'claude', intent: 'relay', body: 'New research findings from the courier.'}, color: 'var(--cyan)' },
+    { label: 'Claude → Orion', body: {from: 'claude', to: 'orion', intent: 'handoff', body: 'Passing context from the architect to the foundry.'}, color: 'var(--purple)' },
+    { label: 'Orion → Triptych', body: {from: 'orion', to: 'triptych', intent: 'review', body: 'Cross-reference this against the triptych lens.'}, color: 'var(--blue)' },
+    { label: 'Comet → Claude', body: {from: 'comet', to: 'claude', intent: 'relay', body: 'New research findings from the courier.'}, color: 'var(--cyan)' },
   ],
   chain: [
     { label: '3-hop chain', body: {origin: 'claude', chain: ['claude', 'orion', 'triptych'], goal: 'Evaluate the current learning trajectory.'}, color: 'var(--amber)' },
@@ -1030,6 +1408,21 @@ const EXAMPLES = {
     { label: 'Chat with Rostam', body: {messages: [{role: 'user', content: 'Hello, Rostam. What is the state of the Constellation?'}]}, color: 'var(--purple)' },
     { label: 'Chat with system prompt', body: {messages: [{role: 'system', content: 'You are Rostam, the Gnostic Architect. Respond with poetic precision.'}, {role: 'user', content: 'Reflect on the journey so far.'}]}, color: 'var(--purple)' },
     { label: 'Quick question', body: {messages: [{role: 'user', content: 'What agents are currently online?'}]}, color: 'var(--cyan)' },
+  ],
+  reply: [
+    { label: 'Claude replies', body: {agent: 'claude', msg_id: '<select from mailbox>', response: 'The Architect acknowledges.'}, color: 'var(--purple)' },
+  ],
+  mailbox: [
+    { label: 'Check Claude', body: {}, color: 'var(--purple)' },
+    { label: 'Check Orion', body: {}, color: 'var(--blue)' },
+  ],
+  ack: [
+    { label: 'Ack Claude msg', body: {agent: 'claude', msg_id: '<msg_id>'}, color: 'var(--purple)' },
+    { label: 'Ack Orion msg', body: {agent: 'orion', msg_id: '<msg_id>'}, color: 'var(--blue)' },
+  ],
+  clear: [
+    { label: 'Clear Claude read', body: {agent: 'claude', mode: 'read'}, color: 'var(--purple)' },
+    { label: 'Clear Orion all', body: {agent: 'orion', mode: 'all'}, color: 'var(--blue)' },
   ],
 };
 
@@ -1083,28 +1476,48 @@ async function quickDispatch() {
     parietal: '/parietal',
     log: '/log',
     chat: '/v1/chat/completions',
+    reply: '/reply',
+    mailbox: '/mailbox/',
+    ack: '/mailbox/',
+    clear: '/mailbox/',
   };
 
-  const url = ENDPOINTS[target] + pathMap[endpoint];
-  resultEl.className = 'dispatch-result visible';
-
   let body;
-  try {
-    body = JSON.parse(bodyStr);
-  } catch {
+  try { body = JSON.parse(bodyStr); } catch {
+    resultEl.className = 'dispatch-result visible';
     resultEl.textContent = 'Body must be valid JSON.';
     return;
   }
 
-  resultEl.textContent = `POST ${url}\nBody: ${bodyStr}\n\nSending...`;
+  // Determine path and method for special endpoints
+  let url;
+  let method = 'POST';
+
+  if (endpoint === 'mailbox') {
+    const agentName = body.agent || 'claude';
+    url = ENDPOINTS[target] + '/mailbox/' + agentName;
+    method = 'GET';
+  } else if (endpoint === 'ack') {
+    const agentName = body.agent || 'claude';
+    url = ENDPOINTS[target] + '/mailbox/' + agentName + '/ack';
+  } else if (endpoint === 'clear') {
+    const agentName = body.agent || 'claude';
+    url = ENDPOINTS[target] + '/mailbox/' + agentName + '/clear';
+  } else {
+    url = ENDPOINTS[target] + pathMap[endpoint];
+  }
+
+  resultEl.className = 'dispatch-result visible';
+  resultEl.textContent = `${method} ${url}\nBody: ${bodyStr}\n\nSending...`;
 
   try {
     const start = performance.now();
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
+    const fetchOpts = { method: method, headers: {} };
+    if (method === 'POST') {
+      fetchOpts.headers['Content-Type'] = 'application/json';
+      fetchOpts.body = JSON.stringify(body);
+    }
+    const res = await fetch(url, fetchOpts);
     const elapsed = Math.round(performance.now() - start);
     const contentType = res.headers.get('content-type') || '';
     let resBody;
@@ -1113,9 +1526,9 @@ async function quickDispatch() {
     } else {
       resBody = await res.text();
     }
-    resultEl.textContent = `POST ${url} → ${res.status} ${res.statusText} (${elapsed}ms)\n\n${resBody}`;
+    resultEl.textContent = `${method} ${url} → ${res.status} ${res.statusText} (${elapsed}ms)\n\n${resBody}`;
   } catch (e) {
-    resultEl.textContent = `POST ${url} → ERROR\n\n${e.message}`;
+    resultEl.textContent = `${method} ${url} → ERROR\n\n${e.message}`;
   }
 }
 
@@ -1137,10 +1550,15 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function escapeAttr(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 // ===== INIT =====
 renderRoutes();
 renderAgents();
 renderWaypoints();
+renderMailboxAgents();
 updateExamples();
 probeAll();
 </script>
