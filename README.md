@@ -31,7 +31,7 @@ The backend runs on Cloudflare Workers with:
 ## Stack
 
 - Static HTML/CSS/JS (no build step)
-- Deployed via Perplexity Computer to S3
+- Deployed via GitHub Pages (`https://harbz07.github.io/constellation-switchboard/`)
 - Backend: Cloudflare Workers + KV
 
 ---
